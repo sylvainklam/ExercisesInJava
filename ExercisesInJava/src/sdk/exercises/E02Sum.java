@@ -14,6 +14,7 @@ import java.util.Scanner;
  */
 public class E02Sum {
 
+	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		int n = -1, sum = 0;
 		int j = 1, k = 1;
