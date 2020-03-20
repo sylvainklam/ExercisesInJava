@@ -1,4 +1,4 @@
-package sdk.exercises;
+package sdk.exercises.lu;
 
 import java.util.Scanner;
 
