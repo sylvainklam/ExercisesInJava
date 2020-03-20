@@ -19,7 +19,7 @@ public class E01TemperatureConverter {
 	}
 
 	private static float convertFahrenheitToCelsius(float temp) {
-		return ((temp - 32) * 5) / 9;
+		return ((temp - 32) * 5) / 9f;
 	}
 
 	@SuppressWarnings("resource")
