@@ -10,7 +10,7 @@ import java.util.Scanner;
  *
  */
 public class E04PascalTriangle {
-	@SuppressWarnings("resource")
+
 	public static void main(String args[]) {
 		int r, i, k, number = 1, j;
 		Scanner scan = new Scanner(System.in);
@@ -27,5 +27,6 @@ public class E04PascalTriangle {
 			}
 			System.out.println();
 		}
+		scan.close();
 	}
 }

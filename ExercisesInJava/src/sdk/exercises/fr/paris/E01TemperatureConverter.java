@@ -22,7 +22,6 @@ public class E01TemperatureConverter {
 		return ((temp - 32) * 5) / 9f;
 	}
 
-	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 
@@ -47,5 +46,6 @@ public class E01TemperatureConverter {
 			/* Print result */
 			System.out.println(C + " degree Fahrenheit is equal to " + F + " degree Celsius.");
 		}
+		in.close();
 	}
 }
