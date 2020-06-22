@@ -1,4 +1,4 @@
-package sdk.exercises.fr.paris;
+package sdk.exercises.fr.paris.pise;
 
 import java.util.Scanner;
 
