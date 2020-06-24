@@ -11,6 +11,7 @@ public class Personne {
 	private List<String> prenom = new ArrayList<String>();
 	private String adresse;
 	private String dateNaissance;
+	private List<CompteEnBanque> compteEnBanque = new ArrayList<CompteEnBanque>();
 
 	public Personne(String nom, List<String> prenom, String adresse, String dateNaissance) {
 		this.nom = nom;
@@ -43,22 +44,26 @@ public class Personne {
 	}
 
 	public String toString() {
-		return getNom() + " " + getPrenom() + " " + getAdresse() + " " + getDateNaissance();
+		return getNom() + " " + getPrenom() + getAdresse() + " " + getDateNaissance() + " possède " + getRichesse(this)
+				+ "€";
 	}
 
 	public static void main(String[] args) throws ParseException {
-		ArrayList<Personne> l = new ArrayList<Personne>(); // création d’une liste vide
-		Scanner scanner = new Scanner(System.in);
-		System.out.print("Nb personnes : ");
-		int nb = scanner.nextInt();
-		do {
-			Personne personne = lireUnePersonneAuClavier(scanner);
-			l.add(personne);
-			nb--;
-		} while (nb != 0);
-		Personne.afficheAdresses(l);
-		Personne.affichePrenoms(l);
-		scanner.close();
+		List<String> prenoms = new ArrayList<String>();
+		prenoms.add("Sylvain");
+		prenoms.add("Joseph");
+		Personne skl = new Personne("KLAM", prenoms, "42 rue de la paix", "06-06-1966");
+		CompteEnBanque c1 = new CompteEnBanque();
+		CompteEnBanque c2 = new CompteEnBanque();
+		skl.addCompteEnBanque(c1);
+		skl.addCompteEnBanque(c2);
+		c2.deposer(1000);
+		c1.deposer(100);
+		System.out.println(skl);
+	}
+
+	private void addCompteEnBanque(CompteEnBanque c1) {
+		getCompteEnBanque().add(c1);
 	}
 
 	private static void affichePrenoms(ArrayList<Personne> l) {
@@ -94,5 +99,27 @@ public class Personne {
 		Personne personne = new Personne(nom, prenoms, adresse, dateNaissance);
 		System.out.println("Personne saisie : " + personne);
 		return personne;
+	}
+
+	public List<CompteEnBanque> getCompteEnBanque() {
+		return compteEnBanque;
+	}
+
+	int getRichesse(ArrayList<Personne> population) {
+		int sum = 0;
+		for (Personne p : population) {
+			for (CompteEnBanque compteEnBanque : p.getCompteEnBanque())
+				sum += compteEnBanque.getSolde();
+		}
+		return sum;
+	}
+
+	int getRichesse(Personne p) {
+		int sum = 0;
+		for (CompteEnBanque compteEnBanque : p.getCompteEnBanque())
+		{
+			sum += compteEnBanque.getSolde();
+		}
+		return sum;
 	}
 }
