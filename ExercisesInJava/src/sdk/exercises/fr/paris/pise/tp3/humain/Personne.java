@@ -1,9 +1,12 @@
 package sdk.exercises.fr.paris.pise.tp3.humain;
 
 import java.text.ParseException;
+import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.PatternSyntaxException;
 
 import sdk.exercises.fr.paris.pise.tp3.banque.CompteEnBanque;
 
@@ -12,12 +15,12 @@ public class Personne {
 	private String nom;
 	private List<String> prenom = new ArrayList<String>();
 	private String adresse;
-	private String dateNaissance;
+	private LocalDate dateNaissance;
 	private List<CompteEnBanque> compteEnBanque = new ArrayList<CompteEnBanque>();
 
 	private static List<Personne> personnes = new ArrayList<Personne>();
-	
-	public Personne(String nom, List<String> prenom, String adresse, String dateNaissance) {
+
+	public Personne(String nom, List<String> prenom, String adresse, LocalDate dateNaissance) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.setAdresse(adresse);
@@ -36,7 +39,7 @@ public class Personne {
 	}
 
 	public String getDateNaissance() {
-		return this.dateNaissance.toString();
+		return (this.dateNaissance != null ? this.dateNaissance.toString() : "UNKNOWN");
 	}
 
 	public String getAdresse() {
@@ -69,6 +72,23 @@ public class Personne {
 		}
 	}
 
+	public static LocalDate convertStringToLocalDate(String dateNaissance) {
+		try {
+			String[] tabDateNaissance = dateNaissance.split("-");
+			int day = Integer.parseInt(tabDateNaissance[0]);
+			int month = Integer.parseInt(tabDateNaissance[1]);
+			int year = Integer.parseInt(tabDateNaissance[2]);
+			return LocalDate.of(year, month, day);
+		} catch (PatternSyntaxException patternSyntaxException) {
+			System.err.println(dateNaissance + ", Pattern syntax error  => " + patternSyntaxException.getMessage());
+		} catch (NumberFormatException numberFormatException) {
+			System.err.println(dateNaissance + ", Number format error  => " + numberFormatException.getMessage());
+		} catch (DateTimeException dateTimeException) {
+			System.err.println(dateNaissance + ", Date error => " + dateTimeException.getMessage());
+		}
+		return null;
+	}
+
 	public static Personne lireUnePersonneAuClavier(Scanner scanner) throws ParseException {
 		System.out.print("Nom : ");
 		String nom = scanner.next();
@@ -86,7 +106,10 @@ public class Personne {
 		String adresse = scanner.next();
 		System.out.print("Date de naissance (dd-MM-yyyy) : ");
 		String dateNaissance = scanner.next();
-		Personne personne = new Personne(nom, prenoms, adresse, dateNaissance);
+
+		LocalDate date = convertStringToLocalDate(dateNaissance);
+
+		Personne personne = new Personne(nom, prenoms, adresse, date);
 		System.out.println("Personne saisie : " + personne);
 		return personne;
 	}
@@ -106,8 +129,7 @@ public class Personne {
 
 	int getRichesse(Personne p) {
 		int sum = 0;
-		for (CompteEnBanque compteEnBanque : p.getCompteEnBanque())
-		{
+		for (CompteEnBanque compteEnBanque : p.getCompteEnBanque()) {
 			sum += compteEnBanque.getSolde();
 		}
 		return sum;

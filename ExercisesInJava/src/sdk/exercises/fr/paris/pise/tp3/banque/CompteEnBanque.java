@@ -42,4 +42,8 @@ public class CompteEnBanque {
 			System.out.println(compteEnBanque);
 		}
 	}
+
+	public String toString() {
+		return " -> " + getSolde();
+	}
 }

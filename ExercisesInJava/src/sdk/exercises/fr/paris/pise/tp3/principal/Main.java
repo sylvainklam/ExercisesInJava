@@ -13,7 +13,8 @@ public class Main {
 		List<String> prenoms = new ArrayList<String>();
 		prenoms.add("Sylvain");
 		prenoms.add("Joseph");
-		Personne skl = new Personne("KLAM", prenoms, "42 rue de la paix", "06-06-1966");
+		Personne skl = new Personne("KLAM", prenoms, "42 rue de la paix",
+				Personne.convertStringToLocalDate("29-02-2020"));
 		CompteEnBanque c1 = new CompteEnBanque();
 		CompteEnBanque c2 = new CompteEnBanque();
 		skl.addCompteEnBanque(c1);
