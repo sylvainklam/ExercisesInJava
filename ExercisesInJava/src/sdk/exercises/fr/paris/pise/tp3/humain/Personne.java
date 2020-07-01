@@ -59,19 +59,6 @@ public class Personne {
 		getCompteEnBanque().add(c1);
 	}
 
-	private static void affichePrenoms() {
-		for (Personne p : getPersonnes()) {
-			System.out.println(p.getPrenom());
-		}
-
-	}
-
-	private static void afficheAdresses() {
-		for (Personne p : getPersonnes()) {
-			System.out.println(p.getAdresse());
-		}
-	}
-
 	public static LocalDate convertStringToLocalDate(String dateNaissance) {
 		try {
 			String[] tabDateNaissance = dateNaissance.split("-");

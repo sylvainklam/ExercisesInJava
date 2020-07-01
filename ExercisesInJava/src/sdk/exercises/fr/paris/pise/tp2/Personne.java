@@ -66,19 +66,6 @@ public class Personne {
 		getCompteEnBanque().add(c1);
 	}
 
-	private static void affichePrenoms(ArrayList<Personne> l) {
-		for (Personne p : l) {
-			System.out.println(p.getPrenom());
-		}
-
-	}
-
-	private static void afficheAdresses(ArrayList<Personne> l) {
-		for (Personne p : l) {
-			System.out.println(p.getAdresse());
-		}
-	}
-
 	public static Personne lireUnePersonneAuClavier(Scanner scanner) throws ParseException {
 		System.out.print("Nom : ");
 		String nom = scanner.next();
